@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lacoste | Crocodile Spirit</title>
+
+    <style>
+        :root {
+            --primary-green: #004B23;
+            --light-green: #68A357;
+            --dark-green: #003612;
+            --off-white: #F4F6F4;
+            --text-dark: #1A1A1A;
+            --text-light: #FFFFFF;
+            --border: #dddddd;
+            --sale: #b00020;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            border: none;
+            background: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-green);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background:
+                linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1800&q=80');
+
+            background-size: cover;
+            background-position: center;
+            min-height: 70vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-green);
+        }
+
+        /* ================= CATEGORY BAR ================= */
+
+        .category-bar {
+            background: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+
+        .category-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+
+        .category-bar button:hover,
+        .category-bar button.active {
+            color: var(--primary-green);
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products-container {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            letter-spacing: 1px;
+        }
+
+        .category-section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 100px;
+        }
+
+        .category-heading {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            background: #eee;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .description {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .price {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .sale-price {
+            color: var(--sale);
+        }
+
+        .add-cart {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            background: var(--primary-green);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .add-cart:hover {
+            background: var(--dark-green);
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--sale);
+            color: white;
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        /* ================= CART ================= */
+
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: none;
+        }
+
+        .cart-overlay.show {
+            display: block;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: min(450px, 100%);
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            transition: right 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-header h2 {
+            color: var(--primary-green);
+        }
+
+        .close-cart {
+            border: none;
+            background: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .quantity-controls button {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+        }
+
+        .remove-item {
+            color: #b00020;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+
+        .cart-footer {
+            border-top: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+
+        .subtotal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #777;
+            padding: 3rem 1rem;
+        }
+
+        /* ================= CHECKOUT ================= */
+
+        .checkout-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .checkout-modal.show {
+            display: flex;
+        }
+
+        .checkout-box {
+            background: white;
+            width: min(600px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            border-radius: 5px;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-header h2 {
+            color: var(--primary-green);
+        }
+
+        .close-checkout {
+            border: none;
+            background: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .order-summary {
+            background: var(--off-white);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .order-summary h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .summary-total {
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .place-order {
+            width: 100%;
+        }
+
+        /* ================= SUCCESS ================= */
+
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background-color: var(--dark-green);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 1rem 4%;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 60vh;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .category-bar {
+                gap: 1rem;
+                justify-content: flex-start;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .products-container {
+                padding: 3rem 4%;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .card {
+                padding: 0.7rem;
+            }
+
+            .card img {
+                height: 190px;
+            }
+
+            .card h3 {
+                font-size: 0.85rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">LACOSTE</div>
+
+    <ul class="nav-links">
+        <li><a href="#men">Men</a></li>
+        <li><a href="#women">Women</a></li>
+        <li><a href="#kids">Kids</a></li>
+        <li><a href="#footwear">Footwear</a></li>
+        <li><a href="#sale">Sale</a></li>
+    </ul>
+
+    <div class="nav-icons">
+        <button class="icon-btn" onclick="searchProducts()" title="Search">
+            🔍
+        </button>
+
+        <button class="icon-btn" onclick="openCart()" title="Shopping Cart">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>The New Season</h1>
+
+    <p>
+        Discover the latest collection of timeless elegance
+        and sport-inspired style.
+    </p>
+
+    <a href="#men" class="btn">
+        Shop Now
+    </a>
+
+</section>
+
+
+<!-- ================= CATEGORY NAVIGATION ================= -->
+
+<div class="category-bar">
+
+    <button onclick="scrollToSection('men')">
+        Men
+    </button>
+
+    <button onclick="scrollToSection('women')">
+        Women
+    </button>
+
+    <button onclick="scrollToSection('kids')">
+        Kids
+    </button>
+
+    <button onclick="scrollToSection('footwear')">
+        Footwear
+    </button>
+
+    <button onclick="scrollToSection('sale')">
+        Sale
+    </button>
+
+</div>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<main class="products-container">
+
+    <h2 class="section-title">
+        Featured Collection
+    </h2>
+
+
+    <!-- MEN -->
+
+    <section class="category-section" id="men">
+
+        <h2 class="category-heading">
+            Men's Collection
+        </h2>
+
+        <div class="grid">
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\shirt.jpg"
+                     alt="Classic Polo">
+
+                <h3>Classic L.12.12 Polo Shirt</h3>
+
+                <p class="description">
+                    Iconic Lacoste cotton polo.
+                </p>
+
+                <p class="price">
+                    R270.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Classic L.12.12 Polo Shirt',
+                        270,
+                        'C:\\Users\\PAICTA-NSF 023\\Downloads\\shirt.jpg'
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\men-shirt.jpg"
+                     alt="Men Shirt"
+                     onerror="this.src='https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Men's Essential Shirt</h3>
+
+                <p class="description">
+                    Smart casual cotton shirt.
+                </p>
+
+                <p class="price">
+                    R650.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Men’s Essential Shirt',
+                        650,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\jacket2.jpg"
+                     alt="Men Jacket"
+                     onerror="this.src='https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Sport Jacket</h3>
+
+                <p class="description">
+                    Lightweight sports jacket.
+                </p>
+
+                <p class="price">
+                    R1,450.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Sport Jacket',
+                        1450,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WOMEN -->
+
+    <section class="category-section" id="women">
+
+        <h2 class="category-heading">
+            Women's Collection
+        </h2>
+
+        <div class="grid">
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\polo women.jpg"
+                     alt="Women's Polo"
+                     onerror="this.src='https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Women's Classic Polo</h3>
+
+                <p class="description">
+                    Elegant slim-fit polo.
+                </p>
+
+                <p class="price">
+                    R720.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Women’s Classic Polo',
+                        720,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\women-dress.jpg"
+                     alt="Women's Dress"
+                     onerror="this.src='https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Sport Inspired Dress</h3>
+
+                <p class="description">
+                    Refined everyday style.
+                </p>
+
+                <p class="price">
+                    R1,100.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Sport Inspired Dress',
+                        1100,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\women.jpg"
+                     alt="Women's Jacket"
+                     onerror="this.src='https://images.unsplash.com/photo-1548624313-0397f0a5a2d8?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Women's Lightweight Jacket</h3>
+
+                <p class="description">
+                    Contemporary sport style.
+                </p>
+
+                <p class="price">
+                    R1,350.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Women’s Lightweight Jacket',
+                        1350,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KIDS -->
+
+    <section class="category-section" id="kids">
+
+        <h2 class="category-heading">
+            Kids' Collection
+        </h2>
+
+        <div class="grid">
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\images.jpg">
+                   
+
+                <h3>Kids Classic Polo</h3>
+
+                <p class="description">
+                    Comfortable cotton polo.
+                </p>
+
+                <p class="price">
+                    R450.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Kids Classic Polo',
+                        450,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\golf tee.jpg">
+
+                <h3>Kids Sport Shirt</h3>
+
+                <p class="description">
+                    Everyday sporty comfort.
+                </p>
+
+                <p class="price">
+                    R390.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Kids Sport Shirt',
+                        390,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\jacket.jpg">
+                     
+
+                <h3>Kids jacket</h3>
+
+                <p class="description">
+                    Classic Lacoste-inspired cap.
+                </p>
+
+                <p class="price">
+                    R250.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Kids Cotton Cap',
+                        250,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTWEAR -->
+
+    <section class="category-section" id="footwear">
+
+        <h2 class="category-heading">
+            Footwear
+        </h2>
+
+        <div class="grid">
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\shoes.jpg"
+                     alt="Court Classic Trainers">
+
+                <h3>Court Classic Leather Trainers</h3>
+
+                <p class="description">
+                    Clean and versatile leather trainers.
+                </p>
+
+                <p class="price">
+                    R1,110.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Court Classic Leather Trainers',
+                        1110,
+                        'C:\\Users\\PAICTA-NSF 023\\Downloads\\shoes.jpg'
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\trainer.jpg"
+                     alt="Sport Sneakers"
+                     onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Sport Sneakers</h3>
+
+                <p class="description">
+                    Lightweight everyday sneakers.
+                </p>
+
+                <p class="price">
+                    R1,250.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Sport Sneakers',
+                        1250,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\tekkie.jpg"
+                     alt="White Sneakers"
+                     onerror="this.src='https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Essential White Trainers</h3>
+
+                <p class="description">
+                    Minimal everyday footwear.
+                </p>
+
+                <p class="price">
+                    R1,300.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Essential White Trainers',
+                        1300,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SALE -->
+
+    <section class="category-section" id="sale">
+
+        <h2 class="category-heading">
+            Sale
+        </h2>
+
+        <div class="grid">
+
+            <div class="card">
+
+                <span class="sale-badge">
+                    SALE
+                </span>
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\cap.jpg"
+                     alt="Cotton Gabardine Cap">
+
+                <h3>Cotton Gabardine Cap</h3>
+
+                <p class="description">
+                    Classic everyday Lacoste cap.
+                </p>
+
+                <p class="price sale-price">
+                    <span class="old-price">R200.00</span>
+                    R145.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Cotton Gabardine Cap',
+                        145,
+                        'C:\\Users\\PAICTA-NSF 023\\Downloads\\cap.jpg'
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="sale-badge">
+                    SALE
+                </span>
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\bag.jpg"
+                     alt="Canvas Shopping Bag">
+
+                <h3>Vertical Zip Canvas Shopping Bag</h3>
+
+                <p class="description">
+                    Practical everyday canvas bag.
+                </p>
+
+                <p class="price sale-price">
+                    <span class="old-price">R1,400.00</span>
+                    R1,128.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Vertical Zip Canvas Shopping Bag',
+                        1128,
+                        'C:\\Users\\PAICTA-NSF 023\\Downloads\\bag.jpg'
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="sale-badge">
+                    SALE
+                </span>
+
+                <img src="C:\Users\PAICTA-NSF 023\Downloads\sale-shirt.jpg"
+                     alt="Sale Shirt"
+                     onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80'">
+
+                <h3>Classic Sale T-Shirt</h3>
+
+                <p class="description">
+                    Soft cotton casual T-shirt.
+                </p>
+
+                <p class="price sale-price">
+                    <span class="old-price">R500.00</span>
+                    R350.00
+                </p>
+
+                <button class="add-cart"
+                    onclick="addToCart(
+                        'Classic Sale T-Shirt',
+                        350,
+                        this.parentElement.querySelector('img').src
+                    )">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= CART OVERLAY ================= -->
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+
+<!-- ================= CART SIDEBAR ================= -->
+
+<aside class="cart-sidebar" id="cartSidebar">
+
+    <div class="cart-header">
+
+        <h2>
+            Your Cart
+        </h2>
+
+        <button class="close-cart" onclick="closeCart()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="cart-items" id="cartItems">
+
+        <div class="empty-cart">
+            Your cart is empty.
+        </div>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="subtotal">
+
+            <span>
+                Subtotal
+            </span>
+
+            <span id="cartSubtotal">
+                R0.00
+            </span>
+
+        </div>
+
+        <button class="btn checkout-btn"
+                onclick="openCheckout()">
+
+            Proceed to Checkout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= CHECKOUT MODAL ================= -->
+
+<div class="checkout-modal" id="checkoutModal">
+
+    <div class="checkout-box">
+
+        <div class="checkout-header">
+
+            <h2>
+                Checkout
+            </h2>
+
+            <button class="close-checkout"
+                    onclick="closeCheckout()">
+                ✕
+            </button>
+
+        </div>
+
+
+        <form id="checkoutForm">
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    placeholder="you@example.com"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Delivery Address
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="Street address"
+                    required>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="City"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Postal Code
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="Postal code"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Payment Method
+                </label>
+
+                <select required>
+
+                    <option value="">
+                        Select payment method
+                    </option>
+
+                    <option>
+                        Credit / Debit Card
+                    </option>
+
+                    <option>
+                        PayPal
+                    </option>
+
+                    <option>
+                        EFT
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="order-summary">
+
+                <h3>
+                    Order Summary
+                </h3>
+
+                <div id="checkoutSummary"></div>
+
+                <div class="summary-line summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="checkoutTotal">
+                        R0.00
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn place-order">
+
+                Place Order
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-links">
+
+        <a href="#men">
+            Men
+        </a>
+
+        <a href="#women">
+            Women
+        </a>
+
+        <a href="#kids">
+            Kids
+        </a>
+
+        <a href="#footwear">
+            Footwear
+        </a>
+
+        <a href="#sale">
+            Sale
+        </a>
+
+    </div>
+
+    <p>
+        &copy; 2026 Lacoste. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    // Cart storage
+    let cart = JSON.parse(localStorage.getItem("lacosteCart")) || [];
+
+
+    // ================= ADD TO CART =================
+
+    function addToCart(name, price, image) {
+
+        const existingProduct = cart.find(
+            product => product.name === name
+        );
+
+        if (existingProduct) {
+
+            existingProduct.quantity++;
+
+        } else {
+
+            cart.push({
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+
+        }
+
+        saveCart();
+
+        updateCart();
+
+        openCart();
+
+    }
+
+
+    // ================= SAVE CART =================
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "lacosteCart",
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    // ================= UPDATE CART =================
+
+    function updateCart() {
+
+        const cartItems = document.getElementById("cartItems");
+        const cartCount = document.getElementById("cartCount");
+        const cartSubtotal = document.getElementById("cartSubtotal");
+
+        let totalItems = 0;
+        let subtotal = 0;
+
+
+        cart.forEach(product => {
+
+            totalItems += product.quantity;
+
+            subtotal +=
+                product.price * product.quantity;
+
+        });
+
+
+        cartCount.textContent = totalItems;
+
+        cartSubtotal.textContent =
+            "R" + subtotal.toFixed(2);
+
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML = `
+                <div class="empty-cart">
+                    Your cart is empty.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        cartItems.innerHTML = cart.map(
+            (product, index) => `
+
+            <div class="cart-item">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}">
+
+                <div class="cart-item-info">
+
+                    <h4>
+                        ${product.name}
+                    </h4>
+
+                    <div class="cart-item-price">
+                        R${product.price.toFixed(2)}
+                    </div>
+
+
+                    <div class="quantity-controls">
+
+                        <button
+                            onclick="changeQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <span>
+                            ${product.quantity}
+                        </span>
+
+                        <button
+                            onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-item"
+                        onclick="removeFromCart(${index})">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+    }
+
+
+    // ================= CHANGE QUANTITY =================
+
+    function changeQuantity(index, change) {
+
+        cart[index].quantity += change;
+
+
+        if (cart[index].quantity <= 0) {
+
+            cart.splice(index, 1);
+
+        }
+
+
+        saveCart();
+
+        updateCart();
+
+    }
+
+
+    // ================= REMOVE ITEM =================
+
+    function removeFromCart(index) {
+
+        cart.splice(index, 1);
+
+        saveCart();
+
+        updateCart();
+
+    }
+
+
+    // ================= OPEN CART =================
+
+    function openCart() {
+
+        document
+            .getElementById("cartSidebar")
+            .classList.add("open");
+
+        document
+            .getElementById("cartOverlay")
+            .classList.add("show");
+
+    }
+
+
+    // ================= CLOSE CART =================
+
+    function closeCart() {
+
+        document
+            .getElementById("cartSidebar")
+            .classList.remove("open");
+
+        document
+            .getElementById("cartOverlay")
+            .classList.remove("show");
+
+    }
+
+
+    // ================= CHECKOUT =================
+
+    function openCheckout() {
+
+        if (cart.length === 0) {
+
+            alert("Your cart is empty. Please add a product first.");
+
+            return;
+
+        }
+
+
+        closeCart();
+
+        updateCheckoutSummary();
+
+        document
+            .getElementById("checkoutModal")
+            .classList.add("show");
+
+    }
+
+
+    function closeCheckout() {
+
+        document
+            .getElementById("checkoutModal")
+            .classList.remove("show");
+
+    }
+
+
+    // ================= CHECKOUT SUMMARY =================
+
+    function updateCheckoutSummary() {
+
+        const summary =
+            document.getElementById("checkoutSummary");
+
+        const totalElement =
+            document.getElementById("checkoutTotal");
+
+        let total = 0;
+
+
+        summary.innerHTML = cart.map(product => {
+
+            const productTotal =
+                product.price * product.quantity;
+
+            total += productTotal;
+
+
+            return `
+
+                <div class="summary-line">
+
+                    <span>
+                        ${product.name}
+                        × ${product.quantity}
+                    </span>
+
+                    <span>
+                        R${productTotal.toFixed(2)}
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+        totalElement.textContent =
+            "R" + total.toFixed(2);
+
+    }
+
+
+    // ================= PLACE ORDER =================
+
+    document
+        .getElementById("checkoutForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const customerName =
+                document.getElementById("customerName").value;
+
+
+            const checkoutBox =
+                document.querySelector(".checkout-box");
+
+
+            checkoutBox.innerHTML = `
+
+                <div class="success-message">
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+                    <h2>
+                        Order Confirmed!
+                    </h2>
+
+                    <p style="margin: 15px 0;">
+                        Thank you, ${customerName}.
+                    </p>
+
+                    <p style="margin-bottom: 25px; color: #666;">
+                        Your Lacoste order has been successfully placed.
+                    </p>
+
+                    <button
+                        class="btn"
+                        onclick="finishOrder()">
+
+                        Continue Shopping
+
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+
+    // ================= FINISH ORDER =================
+
+    function finishOrder() {
+
+        cart = [];
+
+        saveCart();
+
+        updateCart();
+
+        closeCheckout();
+
+        location.reload();
+
+    }
+
+
+    // ================= CATEGORY NAVIGATION =================
+
+    function scrollToSection(sectionId) {
+
+        document
+            .getElementById(sectionId)
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    // ================= SEARCH =================
+
+    function searchProducts() {
+
+        const searchTerm =
+            prompt("What product are you looking for?");
+
+
+        if (!searchTerm) {
+            return;
+        }
+
+
+        const cards =
+            document.querySelectorAll(".card");
+
+
+        let found = false;
+
+
+        cards.forEach(card => {
+
+            const productName =
+                card.querySelector("h3")
+                    .textContent
+                    .toLowerCase();
+
+
+            if (
+                productName.includes(
+                    searchTerm.toLowerCase()
+                )
+            ) {
+
+                card.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                card.style.outline =
+                    "3px solid #68A357";
+
+
+                setTimeout(() => {
+
+                    card.style.outline = "none";
+
+                }, 2500);
+
+
+                found = true;
+
+                return;
+
+            }
+
+        });
+
+
+        if (!found) {
+
+            alert(
+                "Sorry, we couldn't find that product."
+            );
+
+        }
+
+    }
+
+
+    // ================= INITIALIZE =================
+
+    updateCart();
+
+</script>
+
+</body>
+</html>
